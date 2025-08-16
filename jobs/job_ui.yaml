@@ -18,5 +18,5 @@
       scm:
         - git:
             url: https://github.com/RazMKhitaryan/OtusLesson.git
-            branch: "${BRANCH}"
+            branch: "project-with-spring-testng"
             script-path: pipelines/jenkinsfile_web.groovy
