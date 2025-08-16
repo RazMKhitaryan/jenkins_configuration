@@ -1,0 +1,10 @@
+- job:
+    name: upload_jobs_2
+    project-type: pipeline
+    description: "Upload all Jenkins jobs using Pipeline Groovy"
+    pipeline-scm:
+      scm:
+        - git:
+            url: https://github.com/RazMKhitaryan/jenkins_configuration.git
+            branch: main
+            script-path: pipelines/jenkinsfile_upload
