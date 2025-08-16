@@ -28,7 +28,7 @@ EOF
     }
 
     stage('Run Upload Script') {
-        sh "jenkins-jobs --conf --flush-cache ${CONFIG_FILE} update ${JOBS_DIR}"
+        sh "jenkins-jobs --conf  ${CONFIG_FILE} --flush-cache update ${JOBS_DIR}"
     }
 
     stage('Finish Upload') {
