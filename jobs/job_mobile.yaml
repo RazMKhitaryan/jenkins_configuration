@@ -1,7 +1,10 @@
 - job:
-    name: Mobile_tests
-    project-type: freestyle
-    description: "My Example Job"
-    builders:
-      - shell: |
-          echo "Hello World"
+      name: Mobile_tests
+      project-type: pipeline
+      description: "Mobile Appium tests with Allure"
+      pipeline-scm:
+          scm:
+              - git:
+                    url: https://github.com/RazMKhitaryan/otusAppium.git
+                    branch: main
+                    script-path: pipelines/jenkinsfile_mobile.groovy
