@@ -1,16 +1,13 @@
+- defaults:
+    git_branch: main
+
 - job:
     name: Api_tests
     project-type: pipeline
     description: "API tests with Maven and Allure"
-    parameters:
-      - string:
-          name: BRANCH
-          default: main
-          description: "Git branch to build"
     pipeline-scm:
       scm:
         - git:
             url: https://github.com/RazMKhitaryan/otus_api_helpers.git
-            branch: "{BRANCH}"
-            credentials-id: ""   # optional if repo is public
+            branch: "{git_branch}"
             script-path: pipelines/jenkinsfile_api.groovy
