@@ -7,4 +7,4 @@
         - git:
             url: https://github.com/RazMKhitaryan/jenkins_configuration.git
             branch: main
-            script-path: Jenkinsfile
+            script-path: pipelines/jenkinsfile_upload.groovy
