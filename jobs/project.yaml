@@ -2,3 +2,4 @@
 - project:
     name: 'job uploader'
     jobs:
+      - update_jobs_2
