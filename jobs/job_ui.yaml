@@ -1,10 +1,22 @@
 - job:
-      name: Web_tests
-      project-type: pipeline
-      description: "Web UI tests with Maven and Allure"
-      pipeline-scm:
-          scm:
-              - git:
-                    url: https://github.com/RazMKhitaryan/OtusLesson.git
-                    branch: project-with-spring-testng
-                    script-path: pipelines/jenkinsfile_web.groovy
+    name: Web_tests
+    project-type: pipeline
+    description: "Web UI tests with Maven and Allure"
+    parameters:
+      - choice:
+          name: BROWSER
+          description: "Choose browser for the tests"
+          choices:
+            - chrome
+            - firefox
+            - edge
+      - string:
+          name: BRANCH
+          default: "project-with-spring-testng"
+          description: "Git branch to run tests from"
+    pipeline-scm:
+      scm:
+        - git:
+            url: https://github.com/RazMKhitaryan/OtusLesson.git
+            branch: "project-with-spring-testng"
+            script-path: pipelines/jenkinsfile_web.groovy
