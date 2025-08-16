@@ -1,14 +1,16 @@
-- multibranch-job:
+- job:
     name: Api_tests
-    description: "API tests with Maven and Allure (all branches)"
-    branch-sources:
-      - github:
-          id: "github-api-tests"   # any unique ID
-          repo-owner: "RazMKhitaryan"
-          repository: "otus_api_helpers"
-          credentials-id: ""       # add if private repo
-          includes: "*"            # include all branches
-          excludes: ""            # exclude none
-    factory:
-      workflow:
-        script-path: "pipelines/jenkinsfile_api.groovy"
+    project-type: pipeline
+    description: "API tests with Maven and Allure"
+    parameters:
+      - string:
+          name: BRANCH
+          default: main
+          description: "Git branch to build"
+    pipeline-scm:
+      scm:
+        - git:
+            url: https://github.com/RazMKhitaryan/otus_api_helpers.git
+            branch: "{BRANCH}"
+            credentials-id: ""   # optional if repo is public
+            script-path: pipelines/jenkinsfile_api.groovy
