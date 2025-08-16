@@ -1,9 +1,0 @@
-- job:
-    name: update_jobs
-    project-type: freestyle
-    description: "Upload all Jenkins jobs"
-
-    builders:
-      - shell: |
-          set -ex
-          jenkins-jobs --conf /home/razmik/jenkins/uploader.ini update /home/razmik/jenkins/jobs
