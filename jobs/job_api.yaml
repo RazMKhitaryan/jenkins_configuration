@@ -1,7 +1,31 @@
 - job:
     name: Api tests
-    project-type: freestyle
-    description: "My Example Job"
-    builders:
-      - shell: |
-          echo "Hello World"
+    project-type: pipeline
+    description: "API tests with Maven and Allure"
+    pipeline:
+        agent: any
+
+        stages:
+            - stage: "Checkout"
+              steps:
+                  - checkout:
+                        scm:
+                            git:
+                                url: https://github.com/RazMKhitaryan/otus_api_helpers.git
+                                branch: main
+
+            - stage: "Run Tests"
+              steps:
+                  - sh: "mvn clean test -DthreadCount=5"
+
+        post:
+            always:
+                - stage: "Allure Report Publisher"
+                  steps:
+                      - allure:
+                            includeProperties: false
+                            jdk: ''
+                            properties: [ ]
+                            reportBuildPolicy: 'ALWAYS'
+                            results:
+                                - path: "allure-results"
