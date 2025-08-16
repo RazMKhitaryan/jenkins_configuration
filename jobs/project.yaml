@@ -2,4 +2,4 @@
 - project:
     name: 'job uploader'
     jobs:
-      - Api tests
+      - Api_tests

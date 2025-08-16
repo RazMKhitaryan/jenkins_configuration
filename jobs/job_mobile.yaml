@@ -1,5 +1,5 @@
 - job:
-    name: Mobile tests
+    name: Mobile_tests
     project-type: freestyle
     description: "My Example Job"
     builders:

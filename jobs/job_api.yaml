@@ -1,5 +1,5 @@
 - job:
-      name: Api tests
+      name: Api_tests
       project-type: pipeline
       description: "API tests with Maven and Allure"
       pipeline-scm:
