@@ -18,7 +18,7 @@ recursive=True
 keep_descriptions=False
 
 [jenkins]
-http://172.20.0.6:8080/jenkins/
+url=http://172.21.0.5:8080/jenkins/
 user=admin
 password=11bf6664b79a47770bf07d6bf18d088417
 crumb=True
