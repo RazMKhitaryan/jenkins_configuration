@@ -1,27 +1,22 @@
 pipeline {
-    agent any
-
-    environment {
-        JOBS_DIR = "${WORKSPACE}/jobs"
-        CONFIG_FILE = "${WORKSPACE}/uploader.ini"
-    }
-
-    stages {
-        stage('Start Upload') {
-            steps {
-                echo "Starting Jenkins Job Uploader..."
-            }
+    node('maven') {
+        environment {
+            JOBS_DIR = "${WORKSPACE}/jobs"
+            CONFIG_FILE = "${WORKSPACE}/uploader.ini"
         }
 
-        stage('Checkout Repo') {
-            steps {
-                git branch: 'main', url: 'https://github.com/RazMKhitaryan/jenkins_configuration.git'
+        stages {
+            stage('Start Upload') {
+                steps { echo "Starting Jenkins Job Uploader..." }
             }
-        }
 
-        stage('Create uploader.ini') {
-            steps {
-                sh """
+            stage('Checkout Repo') {
+                steps { git branch: 'main', url: 'https://github.com/RazMKhitaryan/jenkins_configuration.git' }
+            }
+
+            stage('Create uploader.ini') {
+                steps {
+                    sh """
                 cat > ${CONFIG_FILE} <<'EOF'
 [job_builder]
 recursive=True
@@ -34,19 +29,16 @@ password=11bf6664b79a47770bf07d6bf18d088417
 crumb=True
 EOF
                 """
-                sh "cat ${CONFIG_FILE}"
+                    sh "cat ${CONFIG_FILE}"
+                }
             }
-        }
 
-        stage('Run Upload Script') {
-            steps {
-                sh "jenkins-jobs --conf ${CONFIG_FILE} update ${JOBS_DIR}"
+            stage('Run Upload Script') {
+                steps { sh "jenkins-jobs --conf ${CONFIG_FILE} update ${JOBS_DIR}" }
             }
-        }
 
-        stage('Finish Upload') {
-            steps {
-                echo "Upload finished successfully!"
+            stage('Finish Upload') {
+                steps { echo "Upload finished successfully!" }
             }
         }
     }
