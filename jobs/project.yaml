@@ -3,5 +3,5 @@
     name: 'job uploader'
     jobs:
       - Api_tests
-      - Web-tests
+      - Web_tests
       - Mobile_tests
