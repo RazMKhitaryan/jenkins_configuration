@@ -1,4 +1,4 @@
-node('maven') {
+node('maven3') {
     stage('Upload All Jobs') {
         echo "Starting job uploader..."
         sh '''
