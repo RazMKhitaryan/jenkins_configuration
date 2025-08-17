@@ -1,12 +1,15 @@
-- pipeline-job:
+- job:
     name: upload_jobs
-    description: Upload jobs using Jenkinsfile
+    project-type: pipeline
+    description: "Upload Jenkins jobs using Groovy script"
+    parameters:
+      - string:
+          name: "BRANCH"
+          default: "main"
+          description: "Branch to build"
     pipeline-scm:
       scm:
         - git:
             url: https://github.com/RazMKhitaryan/jenkins_configuration.git
             branch: main
-    wrappers:
-      - timeout:
-          time: 60
-          unit: MINUTES
+      script-path: pipelines/jobs_uploader.groovy
