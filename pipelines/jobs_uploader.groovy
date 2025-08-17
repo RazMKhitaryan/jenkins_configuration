@@ -1,4 +1,4 @@
-node('maven3') {
+node('maven') {
     env.JOBS_DIR = "${WORKSPACE}/jobs"
     env.CONFIG_FILE = "${WORKSPACE}/uploader.ini"
 
@@ -18,7 +18,7 @@ recursive=True
 keep_descriptions=False
 
 [jenkins]
-url=http://45.132.17.22//jenkins/
+url=http://45.132.17.22/jenkins/
 user=admin
 password=admin
 EOF
