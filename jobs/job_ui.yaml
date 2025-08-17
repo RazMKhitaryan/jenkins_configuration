@@ -9,7 +9,6 @@
           choices:
             - chrome
             - firefox
-            - edge
       - string:
           name: BRANCH
           default: "project-with-spring-testng"
