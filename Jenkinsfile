@@ -18,7 +18,7 @@ recursive=True
 keep_descriptions=False
 
 [jenkins]
-url=http://jenkins:8080/jenkins/
+url=http://172.20.0.5:8080/jenkins/
 user=admin
 password=11bf6664b79a47770bf07d6bf18d088417
 crumb=True
@@ -28,13 +28,7 @@ EOF
     }
 
     stage('Run Upload Script') {
-        docker.image('python:3.11-slim').inside('--network selenoid_net1 -v ${WORKSPACE}:/workspace') {
-            sh """
-            pip install --quiet --upgrade pip
-            pip install --quiet jenkins-job-builder
-            jenkins-jobs --conf /workspace/uploader.ini update /workspace/jobs
-            """
-        }
+        sh "jenkins-jobs --conf  ${CONFIG_FILE} --flush-cache update ${JOBS_DIR}"
     }
 
     stage('Finish Upload') {
