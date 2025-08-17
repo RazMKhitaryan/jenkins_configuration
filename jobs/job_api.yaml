@@ -1,10 +1,15 @@
 - job:
-      name: Api_tests
-      project-type: pipeline
-      description: "API tests with Maven and Allure"
-      pipeline-scm:
-          scm:
-              - git:
-                    url: https://github.com/RazMKhitaryan/otus_api_helpers.git
-                    branch: main
-                    script-path: pipelines/jenkinsfile_api.groovy
+    name: Api_tests
+    project-type: pipeline
+    description: "API tests with Maven and Allure"
+    parameters:
+      - string:
+          name: BRANCH
+          default: "main"
+          description: "Git branch to run tests from"
+    pipeline-scm:
+      scm:
+        - git:
+            url: https://github.com/RazMKhitaryan/otus_api_helpers.git
+            branch: main
+            script-path: pipelines/jenkinsfile_api.groovy

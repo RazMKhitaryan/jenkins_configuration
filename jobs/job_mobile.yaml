@@ -1,10 +1,15 @@
 - job:
-      name: Mobile_tests
-      project-type: pipeline
-      description: "Mobile Appium tests with Allure"
-      pipeline-scm:
-          scm:
-              - git:
-                    url: https://github.com/RazMKhitaryan/otusAppium.git
-                    branch: main
-                    script-path: pipelines/jenkinsfile_mobile.groovy
+    name: Mobile_tests
+    project-type: pipeline
+    description: "Mobile Appium tests with Allure"
+    parameters:
+      - string:
+          name: BRANCH
+          default: "main"
+          description: "Git branch to run tests from"
+    pipeline-scm:
+      scm:
+        - git:
+            url: https://github.com/RazMKhitaryan/otusAppium.git
+            branch: main
+            script-path: pipelines/jenkinsfile_mobile.groovy
