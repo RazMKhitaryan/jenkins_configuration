@@ -1,0 +1,12 @@
+- pipeline-job:
+    name: upload_jobs
+    description: Upload jobs using Jenkinsfile
+    pipeline-scm:
+      scm:
+        - git:
+            url: https://github.com/RazMKhitaryan/jenkins_configuration.git
+            branch: main
+    wrappers:
+      - timeout:
+          time: 60
+          unit: MINUTES
