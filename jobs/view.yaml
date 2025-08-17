@@ -6,7 +6,7 @@
     filter-executors: true
     filter-queue: true
     job-name:
-      - 'update_jobs_2'
+      - 'upload_jobs'
       - 'Web tests'
       - 'Mobile tests'
       - 'Api tests'
