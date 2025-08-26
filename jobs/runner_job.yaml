@@ -2,5 +2,4 @@
     name: runner_job
     project-type: pipeline
     description: "Runner job for Web,API,MOBILE tests"
-    pipeline-scm:
-      script-path: pipelines/runner_job.groovy
+    script-path: pipelines/runner_job.groovy
