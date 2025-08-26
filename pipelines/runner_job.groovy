@@ -27,32 +27,35 @@ node('maven') {
 
     stage('Collect Allure Results') {
         script {
-            // Copy artifacts only if build is not null
+            // Copy artifacts only if build is not null and job actually archived results
             if (apiBuild != null) {
                 copyArtifacts(
                         projectName: 'Api_tests',
-                        selector: specific(apiBuild.number.toString()), // convert to String
+                        selector: specific(apiBuild.number.toString()),
                         filter: 'allure-results/**',
                         target: 'allure-results/api',
-                        flatten: true
+                        flatten: true,
+                        optional: true // <- prevents failure if no artifacts
                 )
             }
             if (mobileBuild != null) {
                 copyArtifacts(
                         projectName: 'Mobile_tests',
-                        selector: specific(mobileBuild.number.toString()), // convert to String
+                        selector: specific(mobileBuild.number.toString()),
                         filter: 'allure-results/**',
                         target: 'allure-results/mobile',
-                        flatten: true
+                        flatten: true,
+                        optional: true
                 )
             }
             if (webBuild != null) {
                 copyArtifacts(
                         projectName: 'Web_tests',
-                        selector: specific(webBuild.number.toString()), // convert to String
+                        selector: specific(webBuild.number.toString()),
                         filter: 'allure-results/**',
                         target: 'allure-results/web',
-                        flatten: true
+                        flatten: true,
+                        optional: true
                 )
             }
         }
