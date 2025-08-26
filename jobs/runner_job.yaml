@@ -12,4 +12,4 @@
         - git:
             url: https://github.com/RazMKhitaryan/jenkins_configuration.git
             branch: main
-      script-path: pipelines/runner_jobs.groovy
+      script-path: pipelines/runner_job.groovy
