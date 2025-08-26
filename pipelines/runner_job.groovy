@@ -1,8 +1,11 @@
 node('maven') {
 
-    stage('Run All Tests in Parallel') {
-        def apiBuild, mobileBuild, webBuild
+    // Declare build variables here so they are visible outside parallel
+    def apiBuild = null
+    def mobileBuild = null
+    def webBuild = null
 
+    stage('Run All Tests in Parallel') {
         parallel(
                 'API Tests': {
                     script {
@@ -24,27 +27,34 @@ node('maven') {
 
     stage('Collect Allure Results') {
         script {
-            copyArtifacts(
-                    projectName: 'Api_tests',
-                    selector: specific(apiBuild.number),
-                    filter: 'allure-results/**',
-                    target: 'allure-results/api',
-                    flatten: true
-            )
-            copyArtifacts(
-                    projectName: 'Mobile_tests',
-                    selector: specific(mobileBuild.number),
-                    filter: 'allure-results/**',
-                    target: 'allure-results/mobile',
-                    flatten: true
-            )
-            copyArtifacts(
-                    projectName: 'Web_tests',
-                    selector: specific(webBuild.number),
-                    filter: 'allure-results/**',
-                    target: 'allure-results/web',
-                    flatten: true
-            )
+            // Only copy if the build ran successfully
+            if (apiBuild != null) {
+                copyArtifacts(
+                        projectName: 'Api_tests',
+                        selector: specific(apiBuild.number),
+                        filter: 'allure-results/**',
+                        target: 'allure-results/api',
+                        flatten: true
+                )
+            }
+            if (mobileBuild != null) {
+                copyArtifacts(
+                        projectName: 'Mobile_tests',
+                        selector: specific(mobileBuild.number),
+                        filter: 'allure-results/**',
+                        target: 'allure-results/mobile',
+                        flatten: true
+                )
+            }
+            if (webBuild != null) {
+                copyArtifacts(
+                        projectName: 'Web_tests',
+                        selector: specific(webBuild.number),
+                        filter: 'allure-results/**',
+                        target: 'allure-results/web',
+                        flatten: true
+                )
+            }
         }
     }
 
@@ -57,5 +67,4 @@ node('maven') {
             ]
         }
     }
-
 }
