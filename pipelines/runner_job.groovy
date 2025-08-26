@@ -1,6 +1,6 @@
 node('maven') {
 
-    // Declare build variables here so they are visible outside parallel
+    // Declare build variables
     def apiBuild = null
     def mobileBuild = null
     def webBuild = null
@@ -27,11 +27,11 @@ node('maven') {
 
     stage('Collect Allure Results') {
         script {
-            // Only copy if the build ran successfully
+            // Copy artifacts only if build is not null
             if (apiBuild != null) {
                 copyArtifacts(
                         projectName: 'Api_tests',
-                        selector: specific(apiBuild.number),
+                        selector: specific(apiBuild.number.toString()), // convert to String
                         filter: 'allure-results/**',
                         target: 'allure-results/api',
                         flatten: true
@@ -40,7 +40,7 @@ node('maven') {
             if (mobileBuild != null) {
                 copyArtifacts(
                         projectName: 'Mobile_tests',
-                        selector: specific(mobileBuild.number),
+                        selector: specific(mobileBuild.number.toString()), // convert to String
                         filter: 'allure-results/**',
                         target: 'allure-results/mobile',
                         flatten: true
@@ -49,7 +49,7 @@ node('maven') {
             if (webBuild != null) {
                 copyArtifacts(
                         projectName: 'Web_tests',
-                        selector: specific(webBuild.number),
+                        selector: specific(webBuild.number.toString()), // convert to String
                         filter: 'allure-results/**',
                         target: 'allure-results/web',
                         flatten: true
