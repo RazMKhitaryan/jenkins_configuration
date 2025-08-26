@@ -2,13 +2,13 @@ node('maven') {
     stage('Run All Tests in Parallel') {
         parallel(
                 'API Tests': {
-                    build job: 'Api_tests'
+                    build job: 'Api_tests', propagate: false
                 },
                 'Mobile Tests': {
-                    build job: 'Mobile_tests'
+                    build job: 'Mobile_tests', propagate: false
                 },
                 'Web Tests': {
-                    build job: 'Web_tests'
+                    build job: 'Web_tests', propagate: false
                 }
         )
     }
