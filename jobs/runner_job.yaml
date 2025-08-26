@@ -1,5 +1,15 @@
 - job:
     name: runner_job
     project-type: pipeline
-    description: "Runner job for Web, API, MOBILE tests"
-    pipeline-script-file: "pipelines/runner_job.groovy"
+    description: "Run all test jobs"
+    parameters:
+      - string:
+          name: "BRANCH"
+          default: "main"
+          description: "Branch to build"
+    pipeline-scm:
+      scm:
+        - git:
+            url: https://github.com/RazMKhitaryan/jenkins_configuration.git
+            branch: main
+      script-path: pipelines/runner_jobs.groovy
