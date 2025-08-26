@@ -1,5 +1,5 @@
-- job-template:
+- job:
     name: runner_job
     project-type: pipeline
-    description: "Runner job for Web,API,MOBILE tests"
-    script-path: pipelines/runner_job.groovy
+    description: "Runner job for Web, API, MOBILE tests"
+    pipeline-script-file: "pipelines/runner_job.groovy"
