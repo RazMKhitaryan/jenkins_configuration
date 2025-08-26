@@ -32,7 +32,7 @@ node('maven') {
                 copyArtifacts(
                         projectName: 'Api_tests',
                         selector: specific(apiBuild.number.toString()),
-                        filter: 'allure-results/**',
+                        filter: 'target/allure-results/**',
                         target: 'allure-results/api',
                         flatten: true,
                         optional: true // <- prevents failure if no artifacts
@@ -42,7 +42,7 @@ node('maven') {
                 copyArtifacts(
                         projectName: 'Mobile_tests',
                         selector: specific(mobileBuild.number.toString()),
-                        filter: 'allure-results/**',
+                        filter: 'target/allure-results/**',
                         target: 'allure-results/mobile',
                         flatten: true,
                         optional: true
@@ -52,7 +52,7 @@ node('maven') {
                 copyArtifacts(
                         projectName: 'Web_tests',
                         selector: specific(webBuild.number.toString()),
-                        filter: 'allure-results/**',
+                        filter: 'target/allure-results/**',
                         target: 'allure-results/web',
                         flatten: true,
                         optional: true
