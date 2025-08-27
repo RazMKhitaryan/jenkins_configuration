@@ -27,22 +27,21 @@ node('maven') {
 
     stage('Collect Allure Results') {
         script {
-            // Copy artifacts only if build is not null and job actually archived results
             if (apiBuild != null) {
                 copyArtifacts(
                         projectName: 'Api_tests',
                         selector: specific(apiBuild.number.toString()),
-                        filter: 'target/allure-results/**',
+                        filter: 'allure-results/**',   // ✅ match child archive path
                         target: 'allure-results/api',
                         flatten: true,
-                        optional: true // <- prevents failure if no artifacts
+                        optional: true
                 )
             }
             if (mobileBuild != null) {
                 copyArtifacts(
                         projectName: 'Mobile_tests',
                         selector: specific(mobileBuild.number.toString()),
-                        filter: 'target/allure-results/**',
+                        filter: 'allure-results/**',   // ✅ match child archive path
                         target: 'allure-results/mobile',
                         flatten: true,
                         optional: true
@@ -52,7 +51,7 @@ node('maven') {
                 copyArtifacts(
                         projectName: 'Web_tests',
                         selector: specific(webBuild.number.toString()),
-                        filter: 'target/allure-results/**',
+                        filter: 'allure-results/**',   // ✅ match child archive path
                         target: 'allure-results/web',
                         flatten: true,
                         optional: true
