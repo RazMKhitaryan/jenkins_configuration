@@ -6,3 +6,4 @@
       - Web_tests
       - Mobile_tests
       - upload_jobs
+      - runner_job
