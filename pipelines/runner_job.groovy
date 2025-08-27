@@ -27,10 +27,14 @@ node('maven') {
 
     stage('Collect Allure Results') {
         script {
+            echo "API build number: ${apiBuild.number}, result: ${apiBuild.result}"
+            echo "Mobile build number: ${mobileBuild.number}, result: ${mobileBuild.result}"
+            echo "Web build number: ${webBuild.number}, result: ${webBuild.result}"
+
             if (apiBuild != null) {
                 copyArtifacts(
                         projectName: 'Api_tests',
-                        selector: specific(apiBuild.number.toString()),
+                        selector: lastSuccessful(),
                         filter: 'allure-results/**',   // ✅ match child archive path
                         target: 'allure-results/api',
                         flatten: true,
@@ -40,7 +44,7 @@ node('maven') {
             if (mobileBuild != null) {
                 copyArtifacts(
                         projectName: 'Mobile_tests',
-                        selector: specific(mobileBuild.number.toString()),
+                        selector: lastSuccessful(),
                         filter: 'allure-results/**',   // ✅ match child archive path
                         target: 'allure-results/mobile',
                         flatten: true,
@@ -50,7 +54,7 @@ node('maven') {
             if (webBuild != null) {
                 copyArtifacts(
                         projectName: 'Web_tests',
-                        selector: specific(webBuild.number.toString()),
+                        selector: lastSuccessful(),
                         filter: 'allure-results/**',   // ✅ match child archive path
                         target: 'allure-results/web',
                         flatten: true,
