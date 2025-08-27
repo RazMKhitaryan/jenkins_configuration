@@ -35,7 +35,7 @@ node('maven') {
                 copyArtifacts(
                         projectName: 'Api_tests',
                         selector: lastSuccessful(),
-                        filter: 'allure-results/**',   // ✅ match child archive path
+                        filter: 'allure-results/**',
                         target: 'allure-results/api',
                         flatten: true,
                         optional: true
@@ -45,7 +45,7 @@ node('maven') {
                 copyArtifacts(
                         projectName: 'Mobile_tests',
                         selector: lastSuccessful(),
-                        filter: 'allure-results/**',   // ✅ match child archive path
+                        filter: 'allure-results/**',
                         target: 'allure-results/mobile',
                         flatten: true,
                         optional: true
@@ -55,7 +55,7 @@ node('maven') {
                 copyArtifacts(
                         projectName: 'Web_tests',
                         selector: lastSuccessful(),
-                        filter: 'allure-results/**',   // ✅ match child archive path
+                        filter: 'allure-results/**',
                         target: 'allure-results/web',
                         flatten: true,
                         optional: true
